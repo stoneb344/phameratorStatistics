@@ -3,7 +3,14 @@ import Clipboard from 'Clipboard';
 var clipboard = new Clipboard('.btn-copy-link');
 clipboard.on('success', function(e) {
   console.log(e);
-  Materialize.toast('sequence copied!', 1000);
+  if (e.trigger.id === "copy-dna-button" || e.trigger.id === "copy-protein-button") {
+    Materialize.toast('sequence copied!', 1000);
+  }
+
+  if (e.trigger.id === "copy-genomeinfo-button" || e.trigger.id === "copy-geneinfo-button" || e.trigger.id === "copy-phaminfo-button") {
+    Materialize.toast('information copied!', 1000);
+  }
+
   e.clearSelection();
 });
 
