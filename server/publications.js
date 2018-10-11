@@ -3,12 +3,7 @@
 
 Meteor.publish("genomes", function () {
   console.log('genomes');
-  return Genomes.find({}, {fields: {phagename: 1, genomelength: 1, cluster: 1, subcluster: 1/*, genes:1, sequence:1*/}});
-});
-
-Meteor.publish("phams", function () {
-  console.log('phams');
-  return Phams.find({}, {fields: {name: 1, size: 1}});
+  return Genomes.find({}, {fields: {phagename: 1, genomelength: 1, cluster: 1, subcluster: 1}});
 });
 
 Meteor.publish("genomesWithSeq", function (selectedGenomes) {

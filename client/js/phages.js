@@ -13,12 +13,12 @@ var blastAlignmentsOutstanding = 0;
 //Fix for href jump @ 1851 and slideToggle @ 1855
 
 function searchPhage(e) {
-  if (e.keyCode == 13) {
-    var rawInput = document.getElementById("autocomplete-input").value;
+  var rawInput = document.getElementById("autocomplete-input").value;
+
+  if (e.keyCode == 13 && (rawInput == 0 || rawInput >= 3)) {
     var inputToUpperCase = rawInput.toUpperCase();
-    //var phageListings = document.getElementsByClassName("labelAccess");
-    //var headerListings = document.getElementsByClassName("labelAccess2");
     var highlighted = document.getElementsByClassName("highlighted");
+     //do based on queries instead ... Genomes.find().fetch()
     var $phageListings = $(".labelAccess");
     var $headerListings = $(".labelAccess2");
     var phageHits = [];
@@ -83,7 +83,7 @@ function searchPhage(e) {
       }
     });
 
-    /*for (i = 0; i < headerListings.length; i++) {
+    for (i = 0; i < headerListings.length; i++) {
       var header = headerListings[i];
       var cleanedHeader = header.innerHTML.replace(/[^a-zA-Z0-9]/g, "");
       var keepHeader = false;
@@ -119,8 +119,6 @@ function searchPhage(e) {
         header.style.backgroundColor = "Yellow";
       }
     }
-  }
-  */
   }
 }
 
@@ -1260,13 +1258,13 @@ Template.phages.onCreated(function() {
   }
   var routeChange = true;*/
 
-    Meteor.call('getlargestphamsize', function(error, result) {
+    Meteor.call('getlargestpham', function(error, result) {
         if (typeof error !== 'undefined') {
             console.log('error getting phams:', error);
         }
         else {
-            maxPham = result;
-            console.log('maxpham', result)
+            maxPham = result.size;
+            console.log('maxpham', result.size)
         }
     });
 
@@ -1523,7 +1521,7 @@ Template.phages.onRendered(function () {
       limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
       onAutocomplete: function(val) {
       },
-      minLength: 3, // The minimum length of the input for the autocomplete to start. Default: 1.
+      minLength: 2, // The minimum length of the input for the autocomplete to start. Default: 1.
     });
   });
 });

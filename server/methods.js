@@ -1,4 +1,4 @@
-Meteor.methods({
+Meteor.methods({ //key:value pairs for methods
   "userExists": function(username) {
     //console.log('checking if user exists');
     return !!Meteor.users.findOne({
@@ -9,7 +9,6 @@ Meteor.methods({
     return "uhhhh";
     //return PhameratorVersionCollection.findOne();
   },
-
   "updateSelectedData": function(phagename, addGenome) {
     //console.log('updateSelectedData called with', phagename, addGenome);
     genomeMaps = Meteor.users.findOne({_id: Meteor.userId()}, {fields: {"selectedData.genomeMaps": 1}}).selectedData.genomeMaps;
@@ -163,10 +162,98 @@ Meteor.methods({
     })
     //console.log (domains);
     return domains;
-
   },
-    "getlargestphamsize": function () {
-        return Phams.findOne({},{sort:{size: -1}}).size;
+
+    "getgeneinfo": function () {
+      var totalGeneLength = 0;
+      var numberOfGenes = 0;
+      var geneObj = { "smallestGene": "",
+                      "largestGene": "",
+                      "smallestGeneLength": Number.MAX_SAFE_INTEGER,
+                      "largestGeneLength": Number.MIN_SAFE_INTEGER
+                     };
+
+      Genomes.find({}).fetch().filter(index => {
+        index.genes.filter(i => {
+          var currentGeneLength = Math.abs(i.stop - i.start);
+          totalGeneLength += currentGeneLength;
+          numberOfGenes++;
+
+          if (currentGeneLength < geneObj.smallestGeneLength) {
+            geneObj.smallestGeneLength = currentGeneLength;
+            geneObj.smallestGene = i.geneID;
+          }
+          if (currentGeneLength > geneObj.largestGeneLength) {
+            geneObj.largestGeneLength = currentGeneLength;
+            geneObj.largestGene = i.geneID;
+          }
+        });
+      });
+      geneObj["meanGeneLength"] = totalGeneLength / numberOfGenes;
+      return geneObj;
+    },
+
+    "getsinglephams" : function () {
+      return Phams.find().fetch().filter(index => { return index.size === 1; });
+    },
+
+    //erased "getlargestphamsize" and integrated it into "getlargestpham"
+    //altered "getlargestphamsize" call near line 1260 in phages.js
+    //to accomodate the change in return value
+    "getlargestpham": function () {
+      var largestPham = Phams.findOne({},{sort:{size: -1}});
+      return {  "name": largestPham.name,
+                "size": largestPham.size  };
+    },
+
+    "getmeanphamsize" : function () {
+      var phamsArray = Phams.find().fetch();
+      var numberOfPhams = phamsArray.length;
+      var totalPhamLength = 0;
+
+      phamsArray.filter(index => { totalPhamLength += index.size; });
+
+      return totalPhamLength / numberOfPhams;
+    },
+
+    "getsmallestgenome": function () {
+      var smallestGenome = Genomes.findOne({},{sort:{genomelength: 1}});
+      return {  "name": smallestGenome.phagename,
+                "length": smallestGenome.genomelength };
+    },
+
+    "getlargestgenome": function () {
+      var largestGenome = Genomes.findOne({},{sort:{genomelength: -1}});
+      return {  "name": largestGenome.phagename,
+                "length": largestGenome.genomelength  };
+    },
+
+    "getmeangenomesize": function () {
+      var genomesArray = Genomes.find().fetch();
+      var numberOfGenomes = genomesArray.length;
+      var totalGenomeLength = 0;
+
+      genomesArray.filter(index => { totalGenomeLength += index.genomelength; });
+
+      return totalGenomeLength / numberOfGenomes;
+    },
+
+    "calculateGCcontent": function () {
+      var totalGC = 0;
+      var totalBP = 0;
+      var contentGC = 0;
+
+      Genomes.find().fetch().filter(index => {
+        var x = index.sequence.length;
+
+        while (x--) {
+          if (index.sequence.charAt(x) === "G" || index.sequence.charAt(x) === "C") {
+            totalGC++;
+          }
+          totalBP++;
+        }
+      });
+      return (totalGC / totalBP) * 100;
     },
 
     "get_number_of_domains" :function  (geneID) {
