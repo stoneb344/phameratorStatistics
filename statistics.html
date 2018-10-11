@@ -1,0 +1,82 @@
+<head>
+    <div id="statisticsModal" class="modal">
+        <div class="modal-content" style="padding-bottom: 10px;">
+            <h4>Database Statistics</h4>
+            <ul class="tabs">
+                <li class="tab col s3 row"><a href="#genome-data">Genome Data</a></li>
+                <li class="tab col s3 row"><a href="#gene-data">Gene Data</a></li>
+                <li class="tab col s3 row"><a href="#phamily-data">Phamily Data</a></li>
+            </ul>
+        </div>
+
+          <div id="genome-data">
+            <table class="centered stats-content highlight">
+              <tbody>
+                <tr>
+                  <td> Smallest Genome </td>
+                  <td id="smallest-genome"> </td>
+                </tr>
+                <tr>
+                  <td> Largest Genome </td>
+                  <td id="largest-genome"> </td>
+                </tr>
+                <tr>
+                  <td> Average Genome Length </td>
+                  <td id="mean-genome"> </td>
+                </tr>
+                <tr>
+                  <td> Average GC Content </td>
+                  <td id="GC-content"> </td>
+                </tr>
+              </tbody>
+            </table>
+          <div class="modal-footer">
+              <button id="copy-genomeinfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#genome-tab-content">Copy to Clipboard</button>
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+          </div>
+        </div>
+
+          <div id="gene-data">
+            <table class="centered stats-content highlight">
+              <tbody>
+                <tr>
+                  <td> Smallest Gene </td>
+                  <td id="smallest-gene"> </td>
+                </tr>
+                <tr>
+                  <td> Largest Gene </td>
+                  <td id="largest-gene"> </td>
+                </tr>
+                <tr>
+                  <td> Average Gene Length </td>
+                  <td id="mean-gene"> </td>
+                </tr>
+              </tbody>
+            </table>
+          <div class="modal-footer">
+             <button id="copy-geneinfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#gene-tab-content">Copy to Clipboard</button>
+             <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+           </div>
+        </div>
+
+          <div id="phamily-data">
+              <table class="centered stats-content highlight">
+                <tr>
+                  <td> Largest Phamily </td>
+                  <td id="largest-pham"></td>
+                </tr>
+                <tr>
+                  <td> Phamilies with 1 Member </td>
+                  <td id="single-pham"></td>
+                </tr>
+                <tr>
+                  <td> Average Phamily Size </td>
+                  <td id="mean-pham"></td>
+                </tr>
+              </table>
+            <div class="modal-footer">
+              <button id="copy-phaminfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#pham-tab-content">Copy to Clipboard</button>
+              <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            </div>
+          </div>
+</head>
