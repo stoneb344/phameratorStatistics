@@ -9,6 +9,14 @@ clipboard.on('success', function(e) {
 
   if (e.trigger.id === "copy-genomeinfo-button" || e.trigger.id === "copy-geneinfo-button" || e.trigger.id === "copy-phaminfo-button") {
     Materialize.toast('information copied!', 1000);
+    /*var x = e.text.length();
+    while (x--) {
+      if(e.text.charAt(x) === "\n") {
+
+      }
+    }*/
+    //e.text.replace("members", "memberXYS");
+    //var originaltext = $(e).next('#copy-genomeinfo-button').closest("#orders-tbl").text();
   }
 
   e.clearSelection();
@@ -22,7 +30,7 @@ var blastAlignmentsOutstanding = 0;
 function searchPhage(e) {
   var rawInput = document.getElementById("autocomplete-input").value;
 
-  if (e.keyCode == 13 && (rawInput == 0 || rawInput >= 3)) {
+  if (e.keyCode == 13 && (rawInput.length == 0 || rawInput.length >= 3)) {
     var inputToUpperCase = rawInput.toUpperCase();
     var highlighted = document.getElementsByClassName("highlighted");
      //do based on queries instead ... Genomes.find().fetch()

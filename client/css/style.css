@@ -272,3 +272,12 @@ h6 {
   margin-left: 30px;
   margin-top: 10px;
 }
+
+.stats-category {
+  text-align: left !important;
+  font-weight: 900;
+}
+
+.stats-numbers {
+  text-align: left !important;
+}

@@ -7,46 +7,46 @@ Template.nav.events({
       console.log("modal opened");
 
 if (!alreadyAdded) {
-      //Genome information
+      //Genome information... note that it takes 2 sec to calculate the average
       Meteor.call("getsmallestgenome", function (err, value) {
           document.getElementById("smallest-genome").insertAdjacentHTML("beforeEnd",
-              value.name + " - " + value.length + " members");
+              value.name + " - " + Number(value.length).toLocaleString() + " members");
       });
 
       Meteor.call("getlargestgenome", function (err, value) {
           document.getElementById("largest-genome").insertAdjacentHTML("beforeEnd",
-              value.name + " - " + value.length + " members");
+              value.name + " - " + Number(value.length).toLocaleString() + " members");
       });
 
       Meteor.call("getmeangenomesize", function (err, value) {
         document.getElementById("mean-genome").insertAdjacentHTML("beforeEnd",
-          Math.round(value) + " members");
+          Number(Math.round(value)).toLocaleString() + " members");
       })
-      //Gene information
+      //Gene information... note that it takes 5 sec to populate
       Meteor.call("getgeneinfo", function (err, value) {
         document.getElementById("smallest-gene").insertAdjacentHTML("beforeEnd",
-          value.smallestGene + " - " + value.smallestGeneLength + " bps");
+          value.smallestGene + " - " + Number(value.smallestGeneLength).toLocaleString() + " bps");
         document.getElementById("largest-gene").insertAdjacentHTML("beforeEnd",
-          value.largestGene + " - " + value.largestGeneLength + " bps");
+          value.largestGene + " - " + Number(value.largestGeneLength).toLocaleString() + " bps");
         document.getElementById("mean-gene").insertAdjacentHTML("beforeEnd",
-          Math.round(value.meanGeneLength) + " bps");
+          Number(Math.round(value.meanGeneLength)).toLocaleString() + " bps");
       });
-      //Pham information
+      //Pham information... note that it takes 5 sec to populate
       Meteor.call("getsinglephams", function (err, value) {
         document.getElementById("single-pham").insertAdjacentHTML("beforeEnd",
-          value.length + " phams");
+          Number(value.length).toLocaleString() + " phams");
       });
 
       Meteor.call("getlargestpham", function (err, value) {
           document.getElementById("largest-pham").insertAdjacentHTML("beforeEnd",
-              value.name + " - " + value.size + " members");
+              value.name + " - " + Number(value.size).toLocaleString() + " members");
       });
 
       Meteor.call("getmeanphamsize", function (err, value) {
         document.getElementById("mean-pham").insertAdjacentHTML("beforeEnd",
-          Math.round(value) + " members");
+          Number(Math.round(value)).toLocaleString() + " members");
       })
-      //GC contentGC
+      //GC contentGC... note that it takes 10 sec to populate
       Meteor.call("calculateGCcontent", function (err, value) {
         document.getElementById("GC-content").insertAdjacentHTML("beforeEnd",
            value.toFixed(2) + "%");

@@ -8,20 +8,27 @@
                 <li class="tab col s3 row"><a href="#phamily-data">Phamily Data</a></li>
             </ul>
         </div>
-        
         <div id="genome-data">
-            <div style="column-count:2">
-                <ul class="stats-content" id="genome-tab-content">
-                  <li class="stats-title">Smallest Genome</li>
-                    <li class="tab col s3 row stats-data db-info" id="smallest-genome"></li>
-                  <li class="stats-title">Largest Genome</li>
-                    <li class="tab col s3 row stats-data db-info" id="largest-genome"> </li>
-                  <li class="stats-title">Average Genome Length</li>
-                    <li class="tab col s3 row stats-data db-info" id="mean-genome"> </li>
-                  <li class="stats-title">Average GC Content</li>
-                  <li class="tab col s3 row stats-data db-info" id="GC-content"> </li>
-                </ul>
-            </div>
+            <table class="centered stats-content highlight">
+                <tbody id="genome-tab-content">
+                  <tr>
+                    <td class="stats-category">Smallest Genome:</td>
+                    <td class="stats-numbers"id="smallest-genome"></td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Largest Genome:</td>
+                    <td class="stats-numbers" id="largest-genome"> </td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Average Genome Length:</td>
+                    <td class="stats-numbers" id="mean-genome"> </td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Average GC Content:</td>
+                    <td class="stats-numbers" id="GC-content"> </td>
+                  </tr>
+                </tbody>
+            </table>
             <div class="modal-footer">
                 <button id="copy-genomeinfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#genome-tab-content">Copy to Clipboard</button>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
@@ -29,16 +36,22 @@
         </div>
 
         <div id="gene-data">
-            <div style="column-count:1">
-                <ul class="stats-content" id="gene-tab-content">
-                  <li class="stats-title">Smallest Gene</li>
-                    <li class="tab col s3 row stats-data db-info" id="smallest-gene"></li>
-                  <li class="stats-title">Largest Gene</li>
-                    <li class="tab col s3 row stats-data db-info" id="largest-gene"></li>
-                  <li class="stats-title">Average Gene Length</li>
-                    <li class="tab col s3 row stats-data db-info" id="mean-gene"></li>
-                </ul>
-            </div>
+            <table class="centered stats-content highlight">
+                <tbody id="gene-tab-content">
+                  <tr>
+                    <td class="stats-category">Smallest Gene:</td>
+                    <td class="stats-numbers" id="smallest-gene"></td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Largest Gene:</td>
+                    <td class="stats-numbers" id="largest-gene"></td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Average Gene Length:</td>
+                    <td class="stats-numbers" id="mean-gene"></td>
+                  </tr>
+                </tbody>
+            </table>
             <div class="modal-footer">
                 <button id="copy-geneinfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#gene-tab-content">Copy to Clipboard</button>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
@@ -46,16 +59,22 @@
         </div>
 
         <div id="phamily-data">
-            <div style="column-count:1">
-                <ul class="stats-content" id="pham-tab-content">
-                  <li class="stats-title">Largest Phamily</li>
-                    <li class="tab col s3 row stats-data db-info" id="largest-pham"></li>
-                  <li class="stats-title">Phamilies With 1 Member
-                    <li class="tab col s3 row stats-data db-info" id="single-pham"></li>
-                  <li class="stats-title">Average Phamily Size</li>
-                    <li class="tab col s3 row stats-data db-info" id="mean-pham"></li>
-                </ul>
-            </div>
+            <table class="centered stats-content highlight">
+                <tbody id="pham-tab-content">
+                  <tr>
+                    <td class="stats-category">Largest Phamily:</td>
+                    <td class="stats-numbers" id="largest-pham"></td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Phamilies With 1 Member:</td>
+                    <td class="stats-numbers" id="single-pham"></td>
+                  </tr>
+                  <tr>
+                    <td class="stats-category">Average Phamily Size:</td>
+                    <td class="stats-numbers" id="mean-pham"></td>
+                  </tr>
+                </tbody>
+            </table>
             <div class="modal-footer">
                 <button id="copy-phaminfo-button" class="waves-effect waves-green btn-flat btn-copy-link" data-clipboard-target="#pham-tab-content">Copy to Clipboard</button>
                 <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
