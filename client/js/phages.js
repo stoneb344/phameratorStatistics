@@ -9,14 +9,7 @@ clipboard.on('success', function(e) {
 
   if (e.trigger.id === "copy-genomeinfo-button" || e.trigger.id === "copy-geneinfo-button" || e.trigger.id === "copy-phaminfo-button") {
     Materialize.toast('information copied!', 1000);
-    /*var x = e.text.length();
-    while (x--) {
-      if(e.text.charAt(x) === "\n") {
-
-      }
-    }*/
-    //e.text.replace("members", "memberXYS");
-    //var originaltext = $(e).next('#copy-genomeinfo-button').closest("#orders-tbl").text();
+    //e.text = e.text.replace(/:/g, ": &#9");
   }
 
   e.clearSelection();
@@ -34,8 +27,8 @@ function searchPhage(e) {
     var inputToUpperCase = rawInput.toUpperCase();
     var highlighted = document.getElementsByClassName("highlighted");
      //do based on queries instead ... Genomes.find().fetch()
-    var $phageListings = $(".labelAccess");
-    var $headerListings = $(".labelAccess2");
+    var $phageListings = d3.selectAll(".labelAccess");
+    var $headerListings = d3.selectAll(".labelAccess2");
     var phageHits = [];
 
     if ($(".collapsible-body").show())
@@ -50,26 +43,26 @@ function searchPhage(e) {
         //console.log("Current index being removed:", highlighted[0]);
         //console.log("Truthy/Falsey value:", !!highlighted[0]);
       }
-      $headerListings.filter((index) => {
-        $headerListings.eq(index).parent().show();
+      $headerListings[0].filter((index) => {
+        index.parentElement.style = "";
       });
       return; //to exit the function if this block is entered
     }
 
-    $phageListings.filter((index) => {
-      if ($phageListings.eq(index).text().toUpperCase().indexOf(inputToUpperCase) > -1) {
-        $phageListings.eq(index).addClass("highlighted");
-        phageHits.push($phageListings.eq(index).text());
+    $phageListings[0].filter((index) => {
+      if (index.innerHTML.toUpperCase().indexOf(inputToUpperCase) > -1) {
+        index.classList.add("highlighted");
+        phageHits.push(index.innerHTML);
         //console.log("ADD highlighted class", $phageListings.eq(index).text());
       } else {
-        $phageListings.eq(index).removeClass("highlighted");
+        index.classList.remove("highlighted");
         //console.log("REMOVE highlighted class", $phageListings.eq(index).text());
       }
     });
 
 //////////USE phageHits ARRAY TO FIND CORRESPONDING HEADERS////////////////
-  $headerListings.filter((index) => {
-    var cleanedHeader = $headerListings.eq(index).text().replace(/[^a-zA-Z0-9]/g, "");
+  $headerListings[0].filter((index) => {
+    var cleanedHeader = index.innerHTML.replace(/[^a-zA-Z0-9]/g, "");
     var keepHeader = false;
 
     phageHits.filter(function (i) {
@@ -81,59 +74,54 @@ function searchPhage(e) {
         }
 
         if (cleanedHeader == headerNameToCheck) {
-          $headerListings.eq(index).parent().show();
+          index.parentElement.style.display = "";
           keepHeader = true;
         } else {
           if (keepHeader) {
-            $headerListings.eq(index).parent().show();
+            index.parentElement.style.display = "";
           } else {
-            $headerListings.eq(index).parent().hide();
+            index.parentElement.style.display = "none";
           }
         }
       });
 
       if (cleanedHeader.indexOf(inputToUpperCase) > -1) {
-        $headerListings.eq(index).parent().show();
-        $headerListings.eq(index).addClass("highlighted");
+        index.parentElement.style.display = "";
+        index.parentElement.style.display = "none";
       }
     });
 
-    for (i = 0; i < headerListings.length; i++) {
-      var header = headerListings[i];
-      var cleanedHeader = header.innerHTML.replace(/[^a-zA-Z0-9]/g, "");
-      var keepHeader = false;
 
-      phageHits.filter(function (currentHit) {
-        var headerNameToCheck = Genomes.findOne({"phagename": currentHit}).cluster +
-          Genomes.findOne({"phagename": currentHit}).subcluster;
+  /*  phageHits.filter(function (currentHit) {
+      var headerNameToCheck = Genomes.findOne({"phagename": currentHit}).cluster +
+        Genomes.findOne({"phagename": currentHit}).subcluster;
 
-        if (headerNameToCheck == "") {
-          headerNameToCheck = "Singletons";
-        }
+      if (headerNameToCheck == "") {
+        headerNameToCheck = "Singletons";
+      }
 
         //console.log("Index:", x, " Phage:", phageHits[x], " Header:", headerNameToCheck);
         //console.log("Header on page:", cleanedHeader);
         //console.log("Outer loop index:", i, " Inner loop index:", x);
         //console.log("Header on page:", cleanedHeader, " Header pulled from phageHits:", headerNameToCheck, " Match?", cleanedHeader == headerNameToCheck);
-        if (cleanedHeader == headerNameToCheck) {
+      if (cleanedHeader == headerNameToCheck) {
+        header.parentElement.style.display = "";
+        keepHeader = true;
+      }
+      else {
+        if (keepHeader) {
           header.parentElement.style.display = "";
-          keepHeader = true;
         }
         else {
-          if (keepHeader) {
-            header.parentElement.style.display = "";
-          }
-          else {
-            header.parentElement.style.display = "none";
-          }
+          header.parentElement.style.display = "none";
         }
-      })
-
-      if (cleanedHeader.indexOf(inputToUpperCase) > -1) {
-        header.parentElement.style.display = "";
-        header.style.backgroundColor = "Yellow";
       }
-    }
+    })
+
+    if (cleanedHeader.indexOf(inputToUpperCase) > -1) {
+      header.parentElement.style.display = "";
+      header.style.backgroundColor = "Yellow";
+    } */
   }
 }
 

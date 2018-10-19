@@ -164,6 +164,14 @@ Meteor.methods({ //key:value pairs for methods
     return domains;
   },
 
+  "cacheDBinfo": function (dbname, field, info) {
+      DBinfo.update({name: dbname}, {$set: {[field]: info}}, {upsert: true});
+  },
+
+  "retrievecachedDBinfo": function (dbname) {
+    return DBinfo.findOne({name: dbname});
+  },
+
     "getgeneinfo": function () {
       var totalGeneLength = 0;
       var numberOfGenes = 0;
@@ -190,6 +198,11 @@ Meteor.methods({ //key:value pairs for methods
         });
       });
       geneObj["meanGeneLength"] = totalGeneLength / numberOfGenes;
+
+  /*  Meteor.call("cacheDBinfo", ["actinodraft", "smallest_gene", smallestGene]);
+      Meteor.call("cacheDBinfo", ["actinodraft", "largest_gene", largestGene]);
+      Meteor.call("cacheDBinfo", ["actinodraft", "smallest_size", smallestGeneLength]);
+      Meteor.call("cacheDBinfo", ["actinodraft", "largest_size", largestGeneLength]); */
       return geneObj;
     },
 
